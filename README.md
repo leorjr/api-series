@@ -11,6 +11,19 @@ nossas series favoritas;
 - Deletar uma série existente, através do seu ID;
 - Atualizar uma série existente, através do seu ID;
 
+## ENDPOINTS
+
+Abaixo temos os endpoints para uso desta API:
+
+| Method | EndPoint           | Response                                                                                  | Request Data                                                                                                                         |
+| ------ | ------------------ | ----------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------ |
+| GET    | /series                  | Será retornado todas as séries cadastradas no banco de dados                                      | --                                                                                                                                   |
+| GET    | /series/<int:id>             | Será retornado uma séries especifica, por seu id                                        | --                                                                                                                                   |
+| DELETE    | /series/<int:id>          | Será deletada uma séries especifica, por seu id                                      | --                    
+| PATCH    | /series/<int:id>          | Será atualizada uma série, através de seu ID, com os dados passados na requisição                                       | {"genre": str, "imdb_rating": float, "released_date": str, "seasons": int, "serie": str } - Não precisa passar todos os campos                
+| POST    | /series/<int:id> | Será criado uma série com os dados passados na requisição | {"genre": str, "imdb_rating": float, "released_date": str, "seasons": int, "serie": str }
+
+
 ## Tech
 
 As principais tecnologias que foram utilizadas neste projeto são:
@@ -53,22 +66,3 @@ flask run
 ```
 
 No terminal, será informado o endereço onde você deverá usar no navegador. Geralmente, é o endereço http://127.0.0.1:5000/
-
-## ENDPOINTS
-
-Abaixo temos os endpoints para uso desta API:
-
-| Method | EndPoint           | Response                                                                                  | Request Data                                                                                                                         |
-| ------ | ------------------ | ----------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------ |
-| GET    | /series                  | Será retornado todas as séries cadastradas no banco de dados                                      | --                                                                                                                                   |
-| GET    | /series/<int:id>             | Será retornado uma séries especifica, por seu id                                        | --                                                                                                                                   |
-| DELETE    | /series/<int:id>          | Será deletada uma séries especifica, por seu id                                      | --                    
-| PATCH    | /series/<int:id>          | Será atualizada uma série, através de seu ID, com os dados passados na requisição                                       | {
-	{
-    "genre": str,
-		"imdb_rating": float,
-		"released_date": str,
-		"seasons": int,
-		"serie": str
-	}                
-| POST   | /calculate-pricing | Será retornado um cálculo comparativo com as informações de uso com o plano e sem o plano | Deverá enviar um objeto com as chaves origem, destino, tempo, plano. Ex.: {"origem":"x", "destino": "y", "tempo": "w", "plano": "z"} |
