@@ -29,4 +29,21 @@ def init_app(app: Flask):
         except UniqueViolation as e:
             return {"error": "série já existe"}, 404
 
+    @app.delete("/series/<int:id>")
+    def delete(id: int):
+        try:
+            data = Series.delete(id)
+            return jsonify(data), 200
+        except SeriesExceptions as e:
+            return {"error": str(e)}, 404
+
+    @app.patch("/series/<int:id>")
+    def update(id: int):
+        try:
+            data_to_update = request.json
+            data = Series.update(id, data_to_update)
+            return jsonify(data), 200
+        except SeriesExceptions as e:
+            return {"error": str(e)}, 404
+
     return app

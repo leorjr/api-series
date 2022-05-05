@@ -84,7 +84,7 @@ class Series():
         results = cur.fetchone()
 
         if not results:
-            raise SeriesExceptions(f"usuário com id {id} não encontrado.")
+            raise SeriesExceptions(f"serie com id {id} não encontrado.")
 
         conn.commit()
 
@@ -119,8 +119,63 @@ class Series():
         cur.close()
         conn.close()
 
+        serialized_data = Series(fetch_result).__dict__
+
+        return serialized_data
+
+    @staticmethod
+    def delete(id):
+
+        conn = psycopg2.connect(**configs)
+        cur = conn.cursor()
+
+        cur.execute(f"DELETE FROM ka_series WHERE id=(%s) RETURNING *;", (id,))
+
+        fetch_result = cur.fetchone()
+
+        conn.commit()
+        cur.close()
+        conn.close()
+
         if not fetch_result:
-            raise SeriesExceptions(f"")
+            raise SeriesExceptions(f"serie com id {id} não encontrado.")
+
+        serialized_data = Series(fetch_result).__dict__
+
+        return serialized_data
+
+    @staticmethod
+    def update(id: int, data):
+
+        conn = psycopg2.connect(**configs)
+        cur = conn.cursor()
+
+        columns = [sql.Identifier(key) for key in data.keys()]
+        values = [sql.Literal(value) for value in data.values()]
+
+        query = sql.SQL(
+            """
+                UPDATE
+                    ka_series
+                SET
+                    ({columns}) = row({values})
+                WHERE
+                    id={id}
+                RETURNING *
+            """).format(id=sql.Literal(str(id)),
+                        columns=sql.SQL(',').join(columns),
+                        values=sql.SQL(',').join(values))
+
+        cur.execute(query)
+
+        fetch_result = cur.fetchone()
+
+        conn.commit()
+        cur.close()
+        conn.close()
+
+        if not fetch_result:
+            raise SeriesExceptions(f"serie com id {id} não encontrado.")
 
         serialized_data = Series(fetch_result).__dict__
 
