@@ -4,6 +4,8 @@ from dotenv import load_dotenv
 from psycopg2 import sql
 from typing import Union
 
+from app.exc.series_exceptions import SeriesExceptions
+
 load_dotenv()
 
 configs = {
@@ -70,6 +72,29 @@ class Series():
 
         return list_results
 
+    @staticmethod
+    def list_serie_by_id(id):
+
+        conn = psycopg2.connect(**configs)
+
+        cur = conn.cursor()
+
+        cur.execute(f'SELECT * FROM ka_series WHERE id=(%s);', (id,))
+
+        results = cur.fetchone()
+
+        if not results:
+            raise SeriesExceptions(f"usuário com id {id} não encontrado.")
+
+        conn.commit()
+
+        cur.close()
+        conn.close()
+
+        result = Series(results).__dict__
+
+        return result
+
     def create_serie(self):
 
         columns = [sql.Identifier(key) for key in self.__dict__.keys()]
@@ -93,6 +118,9 @@ class Series():
         conn.commit()
         cur.close()
         conn.close()
+
+        if not fetch_result:
+            raise SeriesExceptions(f"")
 
         serialized_data = Series(fetch_result).__dict__
 
