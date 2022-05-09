@@ -1,6 +1,6 @@
 # API REST series
 
-O objetivo desta API é criar um backend simplificado onde podemos realizar um CRUD na mesma, 
+O objetivo desta API é criar um backend simplificado onde podemos realizar um CRUD na mesma,
 nossas series favoritas;
 
 ## Features
@@ -15,14 +15,13 @@ nossas series favoritas;
 
 Abaixo temos os endpoints para uso desta API:
 
-| Method | EndPoint           | Response                                                                                  | Request Data                                                                                                                         |
-| ------ | ------------------ | ----------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------ |
-| GET    | /series                  | Será retornado todas as séries cadastradas no banco de dados                                      | --                                                                                                                                   |
-| GET    | /series/<:id>             | Será retornado uma séries especifica, por seu id                                        | --                                                                                                                                   |
-| DELETE    | /series/<:id>          | Será deletada uma séries especifica, por seu id                                      | --                    
-| PATCH    | /series/<:id>          | Será atualizada uma série, através de seu ID, com os dados passados na requisição                                       | {"genre": str, "imdb_rating": float, "released_date": str, "seasons": int, "serie": str } - Não precisa passar todos os campos                
-| POST    | /series | Será criado uma série com os dados passados na requisição | {"genre": str, "imdb_rating": float, "released_date": str, "seasons": int, "serie": str }
-
+| Method | EndPoint          | Response                                                                          | Request Data                                                                                                                   |
+| ------ | ----------------- | --------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------ |
+| GET    | /api/series       | Será retornado todas as séries cadastradas no banco de dados                      | --                                                                                                                             |
+| GET    | /api/series/<:id> | Será retornado uma séries especifica, por seu id                                  | --                                                                                                                             |
+| DELETE | /api/series/<:id> | Será deletada uma séries especifica, por seu id                                   | --                                                                                                                             |
+| PATCH  | /api/series/<:id> | Será atualizada uma série, através de seu ID, com os dados passados na requisição | {"genre": str, "imdb_rating": float, "released_date": str, "seasons": int, "serie": str } - Não precisa passar todos os campos |
+| POST   | /api/series       | Será criado uma série com os dados passados na requisição                         | {"genre": str, "imdb_rating": float, "released_date": str, "seasons": int, "serie": str }                                      |
 
 ## Tech
 
