@@ -18,10 +18,10 @@ Abaixo temos os endpoints para uso desta API:
 | Method | EndPoint           | Response                                                                                  | Request Data                                                                                                                         |
 | ------ | ------------------ | ----------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------ |
 | GET    | /series                  | Será retornado todas as séries cadastradas no banco de dados                                      | --                                                                                                                                   |
-| GET    | /series/<int:id>             | Será retornado uma séries especifica, por seu id                                        | --                                                                                                                                   |
-| DELETE    | /series/<int:id>          | Será deletada uma séries especifica, por seu id                                      | --                    
-| PATCH    | /series/<int:id>          | Será atualizada uma série, através de seu ID, com os dados passados na requisição                                       | {"genre": str, "imdb_rating": float, "released_date": str, "seasons": int, "serie": str } - Não precisa passar todos os campos                
-| POST    | /series/<int:id> | Será criado uma série com os dados passados na requisição | {"genre": str, "imdb_rating": float, "released_date": str, "seasons": int, "serie": str }
+| GET    | /series/<:id>             | Será retornado uma séries especifica, por seu id                                        | --                                                                                                                                   |
+| DELETE    | /series/<:id>          | Será deletada uma séries especifica, por seu id                                      | --                    
+| PATCH    | /series/<:id>          | Será atualizada uma série, através de seu ID, com os dados passados na requisição                                       | {"genre": str, "imdb_rating": float, "released_date": str, "seasons": int, "serie": str } - Não precisa passar todos os campos                
+| POST    | /series | Será criado uma série com os dados passados na requisição | {"genre": str, "imdb_rating": float, "released_date": str, "seasons": int, "serie": str }
 
 
 ## Tech
